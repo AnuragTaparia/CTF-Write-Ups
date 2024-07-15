@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Port 389 - LDAP Enumeration</title>
+    <link rel="stylesheet" href="../../../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Port 389 - LDAP Enumeration</h2>
+      <p>
+        The nmap script did some basic enumeration and returned the domain
+        <strong>EGOTISTICAL-BANK.LOCAL</strong>. I’ll dig in a bit more with
+        ldapsearch.
+      </p>
+      <pre><code>ldapsearch -H ldap://10.10.10.175 -x -s base namingcontexts
+-x           # simple auth
+-H ldap://10.10.10.175  # host to query
+-s base      # set the scope to base
+namingcontexts  # return naming contexts</code></pre>
+      <p>This gives the domain, <strong>EGOTISTICAL-BANK.LOCAL</strong>:</p>
+      <img src="image.png" alt="LDAP Search Result" />
+      <p>Now to get more info about the domain:</p>
+      <pre><code>ldapsearch -H ldap://10.10.10.175 -x -b "dc=EGOTISTICAL-BANK,dc=local"</code></pre>
+      <img src="image 2.png" alt="LDAP Detailed Info" />
+    </div>
+  </body>
+</html>

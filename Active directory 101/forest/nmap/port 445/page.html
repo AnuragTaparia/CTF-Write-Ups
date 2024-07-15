@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Port 445</title>
+    <link rel="stylesheet" href="../../../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Port 445</h1>
+
+      <h2>SMB - TCP 445</h2>
+      <p>
+        Neither smbmap nor smbclient will allow me to list shares without a
+        password:
+      </p>
+      <img src="image.png" alt="smbmap/smbclient Error" />
+      <img src="image 2.png" alt="smbmap/smbclient Error 2" />
+
+      <h2>RPC - TCP 445</h2>
+      <p>I’ll connect with null auth:</p>
+      <img src="image 3.png" alt="RPC Connection with Null Auth" />
+
+      <p>I can get a list of users with enumdomusers:</p>
+      <img src="image 4.png" alt="enumdomusers User List" />
+
+      <p>I can list the groups too:</p>
+      <img src="image 5.png" alt="Group List" />
+
+      <p>
+        I can also look at a group for its members. For example, the Domain
+        Admins group has one member, rid 0x1f4:
+      </p>
+      <img src="image 6.png" alt="Domain Admins Group Members" />
+
+      <p>That's the Administrator account:</p>
+      <img src="image 7.png" alt="Administrator Account" />
+    </div>
+  </body>
+</html>

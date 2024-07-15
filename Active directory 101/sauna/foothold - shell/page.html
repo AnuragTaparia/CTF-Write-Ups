@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Foothold / shell</title>
+    <link rel="stylesheet" href="../../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Foothold / shell</h1>
+      <p>Shell as fsmith</p>
+
+      <h2>AS-REP Roasting Background</h2>
+      <p>
+        This
+        <a
+          href="https://m0chan.github.io/2019/07/31/How-To-Attack-Kerberos-101.html#as-rep-roasting"
+          target="_blank"
+          >article</a
+        >
+        has a great post on attacking Kerberos that includes AS-REP Roasting.
+        Typically, when you try to request authentication through Kerberos,
+        first the requesting party has to authenticate itself to the DC. But
+        there is an option, DONT_REQ_PREAUTH where the DC will just send the
+        hash to an unauthenticated user. AS-REP Roasting is looking to see if
+        any known users happen to have this option set.
+      </p>
+
+      <p>
+        I’ll use the list of users I collected from username-anarchy, and run
+        GetNPUsers.py to look for vulnerable users. Three come back as not
+        vulnerable, but one gives a hash:
+      </p>
+
+      <pre><code>GetNPUsers.py 'EGOTISTICAL-BANK.LOCAL/' -usersfile uname.txt -format hashcat -outputfile hashes.aspreroast -dc-ip 10.10.10.175</code></pre>
+
+      <div class="images">
+        <img src="image.png" alt="Image 1" />
+
+        <p>Since we got the hash we can use hashcat to crack it:</p>
+
+        <img src="image 2.png" alt="Image 2" />
+
+        <p>We got the password. Now we can use evil-winrm:</p>
+
+        <img src="image 3.png" alt="Image 3" />
+      </div>
+
+      <p>Boom! We have user.txt</p>
+    </div>
+  </body>
+</html>

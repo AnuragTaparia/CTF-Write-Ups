@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>FootHold / Shell</title>
+    <link rel="stylesheet" href="../../../pages.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>FootHold / Shell</h1>
+
+      <p>Shell as <strong>svc-alfresco</strong></p>
+
+      <p>
+        In Kerberoasting, typically it requires credentials on the domain to
+        authenticate with. There is an option for an account to have the
+        property “Do not require Kerberos preauthentication” or
+        UF_DONT_REQUIRE_PREAUTH set to true. AS-REP Roasting is an attack
+        against Kerberos for these accounts. I have a list of accounts from my
+        RPC enumeration above. I’ll start without the SM* or HealthMailbox*
+        accounts:
+      </p>
+      <img src="image.png" alt="Kerberoasting Explanation" />
+
+      <p>
+        Now I can use the Impacket tool GetNPUsers.py to try to get a hash for
+        each user, and I find one for the svc-alfresco account:
+      </p>
+
+      <p>
+        svc-alfresco is a service account. Searching for alfresco online brings
+        us to this
+        <a
+          href="https://docs.alfresco.com/process-services/latest/config/authenticate/"
+          target="_blank"
+          >setup documentation</a
+        >. According to this, the service needs Kerberos pre-authentication to
+        be disabled. This means that we can request the encrypted TGT for this
+        user. As the TGT contains material that is encrypted with the user's
+        NTLM hash, we can subject this to an offline brute force attack, and
+        attempt to get the password for svc-alfresco.
+      </p>
+
+      <pre><code>for user in $(cat users.txt); do GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb/${user} | grep -v Impacket; done</code></pre>
+      <img src="image 2.png" alt="GetNPUsers Result" />
+
+      <p>Now we will use hashcat for cracking hash:</p>
+
+      <pre><code>hashcat -m 18200 svc-alfresco.kerb /home/anurag/Downloads/rockyou.txt --force</code></pre>
+      <img src="image 3.png" alt="Hashcat Result" />
+
+      <p>Using this credential with evil-winrm and boom, we are in:</p>
+
+      <pre><code>evil-winrm -i 10.10.10.161 -u svc-alfresco -p s3rvice</code></pre>
+      <img src="image 4.png" alt="evil-winrm Shell" />
+
+      <p>We found user.txt:</p>
+
+      <img src="image 5.png" alt="user.txt Found" />
+    </div>
+  </body>
+</html>
