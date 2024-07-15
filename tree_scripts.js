@@ -1,17 +1,14 @@
-var displayStates = {};
-
+var displayStates = [];
 function showDiv(div) {
   div.style.height = "";
   div.style.display = "block";
   div.style.visibility = "visible";
 }
-
 function hideDiv(div) {
   div.style.height = "0px";
   div.style.display = "none";
   div.style.visibility = "hidden";
 }
-
 function toggleDiv(div, defaultState) {
   if (displayStates[div.id] === undefined) {
     displayStates[div.id] = defaultState;
@@ -23,12 +20,7 @@ function toggleDiv(div, defaultState) {
     hideDiv(div);
   }
 }
-
-function toggleDivName(divname, defaultState, path) {
+function toggleDivName(divname, defaultState) {
   var div = document.getElementById(divname);
   toggleDiv(div, defaultState);
-
-  // Update URL path without reloading the page
-  var newPath = path || "";
-  history.pushState({}, "", newPath);
 }

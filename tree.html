@@ -11,43 +11,31 @@
       <!-- Active Directory 101 Section -->
       <div class="section">
         <div class="section-title">
-          <span
-            class="toggle"
-            onclick="toggleDivName('ad_section', true, 'Active directory 101/default_content.html')"
+          <span class="toggle" onclick="toggleDivName('ad_section', true)"
             >+</span
           >
-          <a
-            href="Active directory 101/default_content.html"
-            onclick="toggleDivName('ad_section', true, 'Active directory 101/default_content.html')"
-            target="viewer"
+          <a href="Active directory 101/default_content.html" target="viewer"
             >Active Directory 101</a
           >
         </div>
         <div id="ad_section" class="node_collapsed">
           <!-- Forest Section -->
           <div class="section">
-            <span
-              class="toggle"
-              onclick="toggleDivName('ad_forest', true, 'Active directory 101/forest/page.html')"
+            <span class="toggle" onclick="toggleDivName('ad_forest', true)"
               >+</span
             >
-            <a
-              href="javascript: toggleDivName('ad_forest', true)"
-              onclick="toggleDivName('ad_forest', true, 'Active directory 101/forest/page.html')"
-              >Forest</a
-            >
+            <a href="javascript: toggleDivName('ad_forest', true)">Forest</a>
           </div>
           <div id="ad_forest" class="node_collapsed">
             <!-- Forest NMAP Section -->
             <div class="section">
               <span
                 class="toggle"
-                onclick="toggleDivName('ad_forest_nmap', false, 'Active directory 101/forest/nmap/page.html')"
+                onclick="toggleDivName('ad_forest_nmap', false)"
                 >+</span
               >
               <a
                 href="Active directory 101/forest/nmap/page.html"
-                onclick="toggleDivName('ad_forest_nmap', false, 'Active directory 101/forest/nmap/page.html')"
                 target="viewer"
                 >NMAP</a
               >
@@ -60,6 +48,7 @@
                 >
               </div>
             </div>
+
             <!-- Forest Foothold/shell Section -->
             <div class="section">
               <a
@@ -79,28 +68,21 @@
           </div>
           <!-- Sauna Section -->
           <div class="section">
-            <span
-              class="toggle"
-              onclick="toggleDivName('ad_sauna', false, 'Active directory 101/sauna/page.html')"
+            <span class="toggle" onclick="toggleDivName('ad_sauna', false)"
               >+</span
             >
-            <a
-              href="javascript: toggleDivName('ad_sauna', true)"
-              onclick="toggleDivName('ad_sauna', false, 'Active directory 101/sauna/page.html')"
-              >Sauna</a
-            >
+            <a href="javascript: toggleDivName('ad_sauna', true)">Sauna</a>
           </div>
           <div id="ad_sauna" class="node_collapsed">
             <!-- Sauna NMAP Section -->
             <div class="section">
               <span
                 class="toggle"
-                onclick="toggleDivName('ad_sauna_nmap', false, 'Active directory 101/sauna/nmap/page.html')"
+                onclick="toggleDivName('ad_sauna_nmap', false)"
                 >+</span
               >
               <a
                 href="Active directory 101/sauna/nmap/page.html"
-                onclick="toggleDivName('ad_sauna_nmap', false, 'Active directory 101/sauna/nmap/page.html')"
                 target="viewer"
                 >NMAP</a
               >
@@ -158,96 +140,63 @@
       <!-- OWASP Top 10 Section -->
       <div class="section">
         <div class="section-title">
-          <span
-            class="toggle"
-            onclick="toggleDivName('owasp_section', true, 'OWASP top 10/default_content.html')"
+          <span class="toggle" onclick="toggleDivName('owasp_section', true)"
             >+</span
           >
-          <a
-            href="OWASP top 10/default_content.html"
-            onclick="toggleDivName('owasp_section', true, 'OWASP top 10/default_content.html')"
-            target="viewer"
+          <a href="OWASP top 10/default_content.html" target="viewer"
             >OWASP Top 10</a
           >
         </div>
         <div id="owasp_section" class="node_collapsed">
           <div class="section">
-            <a
-              href="OWASP top 10/sanitize/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/sanitize/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/sanitize/page.html" target="viewer"
               >&nbsp;&nbsp;sanitize</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/baby auth/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby auth/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/baby auth/page.html" target="viewer"
               >&nbsp;&nbsp;baby auth</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/baby nginxatsu/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby nginxatsu/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/baby nginxatsu/page.html" target="viewer"
               >&nbsp;&nbsp;baby nginxatsu</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/baby waffles order/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby waffles order/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/baby waffles order/page.html" target="viewer"
               >&nbsp;&nbsp;baby WAFfles order</a
             >
           </div>
           <div class="section">
             <a
               href="OWASP top 10/baby todo or not todo/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby todo or not todo/page.html')"
               target="viewer"
               >&nbsp;&nbsp;baby todo or not todo</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/baby bonechewercon/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby bonechewercon/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/baby bonechewercon/page.html" target="viewer"
               >&nbsp;&nbsp;baby BoneChewerCon</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/full stack conf/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/full stack conf/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/full stack conf/page.html" target="viewer"
               >&nbsp;&nbsp;Full Stack Conf</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/baby website rick/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby website rick/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/baby website rick/page.html" target="viewer"
               >&nbsp;&nbsp;baby website rick</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/baby breaking grad/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/baby breaking grad/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/baby breaking grad/page.html" target="viewer"
               >&nbsp;&nbsp;baby breaking grad</a
             >
           </div>
           <div class="section">
-            <a
-              href="OWASP top 10/looking glasses/page.html"
-              onclick="toggleDivName('owasp_section', false, 'OWASP top 10/looking glasses/page.html')"
-              target="viewer"
+            <a href="OWASP top 10/looking glasses/page.html" target="viewer"
               >&nbsp;&nbsp;looking glasses</a
             >
           </div>
